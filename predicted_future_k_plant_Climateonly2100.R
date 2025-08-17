@@ -1,21 +1,5 @@
 #20240801 updated
-#edit  from /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/002_code/09_turnover_k_PLANT_PET_climate_sm_6.R
-# NOTE now all plant PET and climate all 19, as pet to 2100, so these all should be to 2100
-# refer to /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/001code/01_2_h2o_automl_parallel_versoin2.R
 
-# f1 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/01cmip6_processed_output',full.names = T)
-# 
-# for (i in model_gpp){
-#   for (j in c('gpp','npp','rsds')) {
-#     for (sc in c('ssp245','ssp585')){
-#       f3 <- grep(paste0(j,'_',i,'_',sc),f1,value = T)
-#       cat(j,' ', i,' ',sc)
-#       message('n= ', length(f3))
-#       cat('\n')
-#     }
-#   }
-# }
-#
 ############################################################################
 ############################################################################
 ############################################################################
@@ -93,10 +77,8 @@ mk <- h2_arg[4]
 
 ##############################################################################################
 
-######################        workflow   ##########
-### as we see from h_auto@leader, the first three models: GBM XGBoost and DEEPlearning are good, here we use them. 
-### ok lets map all of them 
-#1 load covars 
+######################    
+#1
 library(terra)
 library(dplyr)
 library(tidyr)

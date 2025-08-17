@@ -1,19 +1,5 @@
 #20240826 from /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/006_Update_after_EC_CSSS/09_01_SOC_equilibrium_annual_SOC_all0410.R
-# # before the litter based on emergent corrected fVeglitter from CMIP6 still not works, now using yue he method to calculate litter input and predict with covariates exlude GPP
-## lets try again
-
-##20240731
-## as we assume fveglitter == Rh, there are two Rh = c(lu + cardamom)
-##
-
-
-# /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/004_using_GPP_fVegLitter/09_01_turnover_after_chat_annual_SOC_all0410.R
-
-# copied from file above 
-
-#----------------------------- 
-#from #/mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/003_code_lehigh/09_01_turnover_after_chat_add_sasha_peat_BD.R
-#one model for each pixel 
+# 
 h2_arg <- commandArgs(trailingOnly = T)
 stopifnot(length(h2_arg) >0 )
 model_no1 <- as.numeric(h2_arg[1])

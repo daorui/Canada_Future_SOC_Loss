@@ -1,22 +1,4 @@
-#from and edit from  /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/003_code_lehigh/09_01_turnover_k_PLANT_PET_climate_sm_6.R
-#
-##------------------------------------
-#20240329 update some related to plant 
-# NOTE now all plant PET and climate all 19, as pet to 2100, so these all should be to 2100
-# refer to /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/001code/01_2_h2o_automl_parallel_versoin2.R
 
-# f1 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/01cmip6_processed_output',full.names = T)
-# 
-# for (i in model_gpp){
-#   for (j in c('gpp','npp','rsds')) {
-#     for (sc in c('ssp245','ssp585')){
-#       f3 <- grep(paste0(j,'_',i,'_',sc),f1,value = T)
-#       cat(j,' ', i,' ',sc)
-#       message('n= ', length(f3))
-#       cat('\n')
-#     }
-#   }
-# }
 #
 ############################################################################
 ############################################################################
@@ -24,14 +6,6 @@
 ############################################################################
 
 #   outline 
-#> 1.  plant ++++  model_gpp  ==  to 2100 and to 2300 
-#> 2. all ++++ plant + pet + climate + sm  == to 2100 as, pet just to 2100 
-#> 3. water related ++++ pet + precipitation(8) + sm  == 2100 , as pet just to 2100, 
-#> #>  some of which we could just precipitation to 2300 for that five models, 
-#> #> but from the results of SOC change, we could deduced that temperature is the most important factor
-#> 4. temperature related ++++ solar + temperature  == to 2100 first. 9 esm models 
-#> 4-1. temperature related ++++ solar + temperature (11) == to 2300 then, 4 esm models, we could know that
-#> as mojority change of SOC comes from T, so we use the 4 models alone could fullfill the request. 
 
 ############################################################################
 ############################################################################
@@ -94,8 +68,7 @@ port0 <- as.numeric(h2_arg[3])
 ##############################################################################################
 
 ######################        workflow   ##########
-### as we see from h_auto@leader, the first three models: GBM XGBoost and DEEPlearning are good, here we use them. 
-### ok lets map all of them 
+### 
 #1 load covars 
 library(terra)
 library(dplyr)
@@ -170,7 +143,6 @@ ind <- readRDS('/mnt/Fastrun/Canada_C/ind20240730.rds')
 
 h2o.init(nthreads = 12,max_mem_size = '100G',port = port0)
 #how ensemble model produced
-#https://github.com/h2oai/h2o-tutorials/blob/master/tutorials/ensembles-stacking/README.md
 #20230704_121940 is for depth as categorical
 # stack_m <- h2o.loadModel('/mnt/DataSpace/Projects/Canada_C/models/bestfamiliy_ensemble/StackedEnsemble_BestOfFamily_6_AutoML_1_20230704_151137')
 # gbm1 <- h2o.loadModel('/mnt/DataSpace/Projects/Canada_C/models/gbm/GBM_lr_annealing_selection_AutoML_1_20230704_151137_select_model')

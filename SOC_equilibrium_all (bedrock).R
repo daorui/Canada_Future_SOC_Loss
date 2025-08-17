@@ -1,19 +1,7 @@
 #20240826 from /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/006_Update_after_EC_CSSS/09_01_SOC_equilibrium_annual_SOC_all0410.R
-# # before the litter based on emergent corrected fVeglitter from CMIP6 still not works, now using yue he method to calculate litter input and predict with covariates exlude GPP
-## lets try again
-
-##20240731
-## as we assume fveglitter == Rh, there are two Rh = c(lu + cardamom)
-##
-
-
-# /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/004_using_GPP_fVegLitter/09_01_turnover_after_chat_annual_SOC_all0410.R
-
-# copied from file above 
-
+# 
 #----------------------------- 
-#from #/mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/003_code_lehigh/09_01_turnover_after_chat_add_sasha_peat_BD.R
-#one model for each pixel 
+
 h2_arg <- commandArgs(trailingOnly = T)
 stopifnot(length(h2_arg) >0 )
 model_no <- as.numeric(h2_arg[1])
@@ -28,8 +16,6 @@ library(sf)
 #library(readr)
 library(data.table) #fread fwrite
 
-# future turnover rate after 
-#Rscript --vanilla /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/002_code/09_turnover_k_Climateonly2300.R 1 2 21217 stell
 landcover <- rast('/mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/LAND_cover/land_cover_mask_lt15_keep_origin_1km_w84_1214.tif') #> 15  #1214 with new extend as same as bd
 
 # ca_soc_stock <- rast('/mnt/DataSpace/Projects/Canada_C/processed_output/base_soc_kgm2_WGS84_1214.tif')
