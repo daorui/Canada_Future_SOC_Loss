@@ -29,7 +29,7 @@ ca_soc1m <- rast('/mnt/DataSpace/Projects/Canada_C/processed_output/EC_after_CSS
 ca_pure_area84 <- rast('/mnt/DataSpace/Projects/Canada_C/processed_output/ca_cmip6_area_WGS84.tif') #20231214 new created
 
 peat_ca <- rast('/mnt/DataSpace/Projects/Canada_C/processed_output/peatland_area.tif')
-peat_area <- ca_pure_area84 * peat_ca  # peat pixel area, and then multiple ca_stock84_0, then sum together
+peat_area <- ca_pure_area84 * peat_ca  # 
 
 
 #
@@ -287,6 +287,4 @@ for (km in k_type) {
 }
 
 
-# f1 <- list.files(pattern = glob2rx('*dynamic*rds'),'/mnt/DataSpace/Projects/Canada_C/Canada_C_final/',full.names = T)
-# plot(unlist(readRDS(f1[1])))
 

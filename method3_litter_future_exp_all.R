@@ -1,33 +1,120 @@
 
+
 #
 ############################################################################
 ############################################################################
 ############################################################################
 ############################################################################
 
-#   outline 
+#   outline
 
 ############################################################################
 ############################################################################
 ############################################################################
 ############################################################################
 #from /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/005_python_EC/0006_GPP_EC_concise_and_used.R
-model_gpp_ec <- c('ACCESS-ESM1-5','BCC-CSM2-MR','CanESM5','CanESM5-1','CESM2-WACCM','EC-Earth3-CC','EC-Earth3-Veg','EC-Earth3-Veg-LR','INM-CM4-8','INM-CM5-0','IPSL-CM6A-LR','TaiESM1')
-model_gpp <- c("EC-Earth3-Veg-LR", "IPSL-CM6A-LR", "ACCESS-ESM1-5", "BCC-CSM2-MR", "CanESM5", "CanESM5-1", "CAS-ESM2-0", "CESM2-WACCM", "CMCC-CM2-SR5", "EC-Earth3-CC", "INM-CM4-8", "INM-CM5-0", "TaiESM1", "EC-Earth3-Veg", "MPI-ESM1-2-HR", "MPI-ESM1-2-LR")
+model_gpp_ec <- c(
+  'ACCESS-ESM1-5',
+  'BCC-CSM2-MR',
+  'CanESM5',
+  'CanESM5-1',
+  'CESM2-WACCM',
+  'EC-Earth3-CC',
+  'EC-Earth3-Veg',
+  'EC-Earth3-Veg-LR',
+  'INM-CM4-8',
+  'INM-CM5-0',
+  'IPSL-CM6A-LR',
+  'TaiESM1'
+)
+model_gpp <- c(
+  "EC-Earth3-Veg-LR",
+  "IPSL-CM6A-LR",
+  "ACCESS-ESM1-5",
+  "BCC-CSM2-MR",
+  "CanESM5",
+  "CanESM5-1",
+  "CAS-ESM2-0",
+  "CESM2-WACCM",
+  "CMCC-CM2-SR5",
+  "EC-Earth3-CC",
+  "INM-CM4-8",
+  "INM-CM5-0",
+  "TaiESM1",
+  "EC-Earth3-Veg",
+  "MPI-ESM1-2-HR",
+  "MPI-ESM1-2-LR"
+)
 #2300 'CanESM5','IPSL-CM6A-LR','ACCESS-ESM1-5','EC-Earth3-Veg'(both 245 and 585)
 #  model_pet <- c("ACCESS-CM2", "ACCESS-ESM1-5", "CanESM5", "CanESM5-1", "CAS-ESM2-0", "FGOALS-g3", "GFDL-ESM4", "IPSL-CM6A-LR", "MIROC6", "MPI-ESM1-2-HR", "MRI-ESM2-0", "EC-Earth3-CC", "MPI-ESM1-2-LR")
-model_pet <- c('ACCESS-CM2','ACCESS-ESM1-5','CanESM5','CanESM5-1','CAS-ESM2-0','FGOALS-g3','GFDL-ESM4','IPSL-CM6A-LR','MIROC6','MPI-ESM1-2-HR','MRI-ESM2-0','EC-Earth3-CC','MPI-ESM1-2-LR','EC-Earth3-Veg-LR','INM-CM4-8','INM-CM5-0')
-model_2100_new <- c("ACCESS-CM2","CanESM5","CMCC-ESM2","EC-Earth3-Veg","FIO-ESM-2-0","INM-CM4-8","IPSL-CM6A-LR","MIROC6","MPI-ESM1-2-HR","MPI-ESM1-2-LR","MRI-ESM2-0",  "ACCESS-ESM1-5", "EC-Earth3-Veg-LR", "INM-CM5-0" ,"BCC-CSM2-MR","CanESM5-1","CAS-ESM2-0", "EC-Earth3-CC")
-model_2300_clim <- c("CanESM5", "EC-Earth3-Veg", "IPSL-CM6A-LR", "MRI-ESM2-0", "ACCESS-ESM1-5")
-model_soil_water <- c("ACCESS-CM2","ACCESS-ESM1-5", "CanESM5"  , "CMCC-ESM2"  ,  "EC-Earth3-Veg" ,"EC-Earth3-Veg-LR" ,"IPSL-CM6A-LR", "MIROC6","MPI-ESM1-2-HR" ,   "MPI-ESM1-2-LR",    "MRI-ESM2-0" )
-model_solar_2300 <- c('IPSL-CM6A-LR','ACCESS-ESM1-5','CanESM5','CESM2-WACCM','EC-Earth3-Veg') # all ssp585, just EC-Earth3-Veg has ssp245 to 2300
-model_climate <- intersect(intersect(model_pet,model_2100_new),model_soil_water)
-model_climate_2300 <- intersect(intersect(model_pet,model_2300_clim),model_soil_water) # waters all to 2100 as pet is to 2100 , and it is not influence that much so ignor it
-model_all <- intersect(intersect(intersect(model_gpp_ec,model_pet),model_2100_new),model_soil_water) #5 to 2100 
-#model_all <- intersect(intersect(model_pet,model_2100_new),model_soil_water) #5 to 2100 
-model_water_2100 <- intersect(intersect(model_pet,model_2100_new),model_soil_water) # 8 to 2100
-model_temp_2100 <- intersect(setdiff(model_gpp_ec,model_solar_2300),model_2100_new) # gpp is equal with solar + temperature or just temperature 
-model_temp_2300 <- intersect(model_solar_2300,model_2100_new)
+model_pet <- c(
+  'ACCESS-CM2',
+  'ACCESS-ESM1-5',
+  'CanESM5',
+  'CanESM5-1',
+  'CAS-ESM2-0',
+  'FGOALS-g3',
+  'GFDL-ESM4',
+  'IPSL-CM6A-LR',
+  'MIROC6',
+  'MPI-ESM1-2-HR',
+  'MRI-ESM2-0',
+  'EC-Earth3-CC',
+  'MPI-ESM1-2-LR',
+  'EC-Earth3-Veg-LR',
+  'INM-CM4-8',
+  'INM-CM5-0'
+)
+model_2100_new <- c(
+  "ACCESS-CM2",
+  "CanESM5",
+  "CMCC-ESM2",
+  "EC-Earth3-Veg",
+  "FIO-ESM-2-0",
+  "INM-CM4-8",
+  "IPSL-CM6A-LR",
+  "MIROC6",
+  "MPI-ESM1-2-HR",
+  "MPI-ESM1-2-LR",
+  "MRI-ESM2-0",
+  "ACCESS-ESM1-5",
+  "EC-Earth3-Veg-LR",
+  "INM-CM5-0" ,
+  "BCC-CSM2-MR",
+  "CanESM5-1",
+  "CAS-ESM2-0",
+  "EC-Earth3-CC"
+)
+model_2300_clim <- c("CanESM5",
+                     "EC-Earth3-Veg",
+                     "IPSL-CM6A-LR",
+                     "MRI-ESM2-0",
+                     "ACCESS-ESM1-5")
+model_soil_water <- c(
+  "ACCESS-CM2",
+  "ACCESS-ESM1-5",
+  "CanESM5"  ,
+  "CMCC-ESM2"  ,
+  "EC-Earth3-Veg" ,
+  "EC-Earth3-Veg-LR" ,
+  "IPSL-CM6A-LR",
+  "MIROC6",
+  "MPI-ESM1-2-HR" ,
+  "MPI-ESM1-2-LR",
+  "MRI-ESM2-0"
+)
+model_solar_2300 <- c('IPSL-CM6A-LR',
+                      'ACCESS-ESM1-5',
+                      'CanESM5',
+                      'CESM2-WACCM',
+                      'EC-Earth3-Veg') # all ssp585, just EC-Earth3-Veg has ssp245 to 2300
+model_climate <- intersect(intersect(model_pet, model_2100_new), model_soil_water)
+model_climate_2300 <- intersect(intersect(model_pet, model_2300_clim), model_soil_water) # waters all to 2100 as pet is to 2100 , and it is not influence that much so ignor it
+model_all <- intersect(intersect(intersect(model_gpp_ec, model_pet), model_2100_new), model_soil_water) #5 to 2100
+#model_all <- intersect(intersect(model_pet,model_2100_new),model_soil_water) #5 to 2100
+model_water_2100 <- intersect(intersect(model_pet, model_2100_new), model_soil_water) # 8 to 2100
+model_temp_2100 <- intersect(setdiff(model_gpp_ec, model_solar_2300), model_2100_new) # gpp is equal with solar + temperature or just temperature
+model_temp_2300 <- intersect(model_solar_2300, model_2100_new)
 # model_gpp <- c("EC-Earth3-Veg-LR", "IPSL-CM6A-LR", "ACCESS-ESM1-5", "BCC-CSM2-MR", "CanESM5", "CanESM5-1", "CAS-ESM2-0", "CESM2-WACCM", "CMCC-CM2-SR5", "EC-Earth3-CC", "INM-CM4-8", "INM-CM5-0", "TaiESM1", "EC-Earth3-Veg", "MPI-ESM1-2-HR", "MPI-ESM1-2-LR")
 # #2300 'CanESM5','IPSL-CM6A-LR','ACCESS-ESM1-5','EC-Earth3-Veg'(both 245 and 585)
 # model_pet <- c("ACCESS-CM2", "ACCESS-ESM1-5", "CanESM5", "CanESM5-1", "CAS-ESM2-0", "FGOALS-g3", "GFDL-ESM4", "IPSL-CM6A-LR", "MIROC6", "MPI-ESM1-2-HR", "MRI-ESM2-0", "EC-Earth3-CC", "MPI-ESM1-2-LR")
@@ -35,29 +122,29 @@ model_temp_2300 <- intersect(model_solar_2300,model_2100_new)
 # model_2300 <- c('GISS-E2-1-G','ACCESS-CM2','ACCESS-ESM1-5','IPSL-CM6A-LR',
 #                 'MRI-ESM2-0','CanESM5')
 # model_all <- unique(c(model_2100,model_2300))
-# 
+#
 # plant_pet_clim <- intersect(model_gpp,intersect(model_pet,model_2100))
 # # we use solar from gpp npp solar, but pet also has solar, so we use pet solar to produce solar
 # solars_map <- intersect(model_gpp,model_2100)
-# pet_map_solar <- intersect(model_pet,model_2100) # all need 
-# pet_solor_map <- intersect(model_gpp,pet_map_solar) # currently we have 
-# setdiff(pet_map_solar,pet_solor_map) 
+# pet_map_solar <- intersect(model_pet,model_2100) # all need
+# pet_solor_map <- intersect(model_gpp,pet_map_solar) # currently we have
+# setdiff(pet_map_solar,pet_solor_map)
 # #> wee still needed see using rsds from /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/001code/00_1_01complementary_PET.R
 # #> but function from /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/001code/00_1complementary_experiments.R
 # #> see L 157 in /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/001code/00_1complementary_experiments.R line that typed # for /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/001code/01_2_h2o_versoin2_complementary_PET.R
-# 
+#
 # to2100_all <-  c("IPSL-CM6A-LR" , "ACCESS-ESM1-5", "CanESM5" ,      "MPI-ESM1-2-HR", "MPI-ESM1-2-LR")
-# to2300_all <- c("IPSL-CM6A-LR" , "ACCESS-ESM1-5", "CanESM5") # with out pet, all pet to 2100. 
-# so the workflow should be 
+# to2300_all <- c("IPSL-CM6A-LR" , "ACCESS-ESM1-5", "CanESM5") # with out pet, all pet to 2100.
+# so the workflow should be
 #> step1 do all gpp npp ndvi evi
-#> step2 do all solar pet ai 
-#> step3 do all throughout 5 to 2100 
-#> step4 do all gpp + climate 3 without pet to 2300 
+#> step2 do all solar pet ai
+#> step3 do all throughout 5 to 2100
+#> step4 do all gpp + climate 3 without pet to 2300
 ##########################################################################################
 #
-#one model for each pixel 
+#one model for each pixel
 h2_arg <- commandArgs(trailingOnly = T)
-stopifnot(length(h2_arg) >0 )
+stopifnot(length(h2_arg) > 0)
 begin <- as.numeric(h2_arg[1])
 end <- as.numeric(h2_arg[2])
 port0 <- as.numeric(h2_arg[3])
@@ -68,8 +155,8 @@ port0 <- as.numeric(h2_arg[3])
 ##############################################################################################
 
 ######################        workflow   ##########
-### 
-#1 load covars 
+###
+#1 load covars
 library(terra)
 library(dplyr)
 library(tidyr)
@@ -96,31 +183,31 @@ unixtools::set.tempdir('/mnt/Fastrun/temp4r')
 
 #cmip6_ca <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/CMIP6_1km_ca',recursive = TRUE,full.names = TRUE)
 
-#2300 
+#2300
 # cmip6_ca1 <- list.files(pattern = 'tif$',path = '/mnt/DataSpace/Projects/CMIP2300/Cmip6/clim_bio19_5m',recursive = F,full.names = TRUE)
 # #2300 new 4models like access and giss
 # cmip6_ca2 <- list.files(pattern = 'tif$',path = '/mnt/DataSpace/Projects/CMIP2300/Cmip6/clim_bio19_5m0',recursive = F,full.names = TRUE)
-# cmip6_ca <- c(cmip6_ca1,cmip6_ca2)[c(1:4)] #parallel when 4 cores, it is 1:4, when for the left 3 cores , 5:7 
+# cmip6_ca <- c(cmip6_ca1,cmip6_ca2)[c(1:4)] #parallel when 4 cores, it is 1:4, when for the left 3 cores , 5:7
 #
 # cmip6_ca_raster <- purrr::map(cmip6_ca,rast)
 ###
 
 #
-dep00 <- c(0,5,15,30,60,100,200,300)
+dep00 <- c(0, 5, 15, 30, 60, 100, 200, 300)
 #ca_base_new <- preproce(ca_covas,dep0 = 0)
 #fwrite(ca_base_new[ind,],'/mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/004_sensitive_analysis/ca_base_new_df.csv')
 # hard drive
-#ca_base_new <- fread('/mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/004_sensitive_analysis/ca_base_new_df.csv')#ssd 
+#ca_base_new <- fread('/mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/004_sensitive_analysis/ca_base_new_df.csv')#ssd
 
-#20240329 changed to 
+#20240329 changed to
 #system.time(ca_base_new <- fread('/mnt/Fastrun/Canada_C/rawdata/004_sensitive_analysis/ca_base_new_df2024.csv'))
 #ca_base_new <- fread('/mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/004_sensitive_analysis/ca_base_new_df20240110.csv')
-#20240801 change to 
+#20240801 change to
 #system.time(ca_base_new <- fread('/mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/004_sensitive_analysis/ca_base_new_df20240730.csv')) # from /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/006_Update_after_EC_CSSS/001_h2o_automl_build_SOC_model.R
 system.time(ca_base_new <- fread('/mnt/Fastrun/Canada_C/ca_base_new_df20240730.csv')) # from /mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_SOC_rebuild/006_Update_after_EC_CSSS/001_h2o_automl_build_SOC_model.R
 
 
-# as ca_base_new has already preproce so already loged now just need factor and log when in bio4 12 18 
+# as ca_base_new has already preproce so already loged now just need factor and log when in bio4 12 18
 ca_base_new <- ca_base_new %>% mutate(
   Maj48 = factor(Maj48, levels = 1:10),
   lith.8 = factor(lith.8, levels = 1:7),
@@ -132,7 +219,7 @@ ca_base_new <- ca_base_new %>% mutate(
 #ind <- readRDS('/mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/004_sensitive_analysis/ind.rds')
 #ssd
 #ind <- readRDS('/mnt/Fastrun/Canada_C/rawdata/004_sensitive_analysis/ind2024.rds')
-#20240801 change to 
+#20240801 change to
 #ind <- readRDS('/mnt/File0/DAAATAAA/Data_collection/Canada_soil_archive/Canada_soc_git_repo/004_sensitive_analysis/ind20240730.rds')
 ind <- readRDS('/mnt/Fastrun/Canada_C/ind20240730.rds')
 
@@ -141,29 +228,22 @@ ind <- readRDS('/mnt/Fastrun/Canada_C/ind20240730.rds')
 #2 load models
 
 
-h2o.init(nthreads = 12,max_mem_size = '100G',port = port0)
-#how ensemble model produced
-#20230704_121940 is for depth as categorical
-# stack_m <- h2o.loadModel('/mnt/DataSpace/Projects/Canada_C/models/bestfamiliy_ensemble/StackedEnsemble_BestOfFamily_6_AutoML_1_20230704_151137')
-# gbm1 <- h2o.loadModel('/mnt/DataSpace/Projects/Canada_C/models/gbm/GBM_lr_annealing_selection_AutoML_1_20230704_151137_select_model')
-# xgb2 <- h2o.loadModel('/mnt/DataSpace/Projects/Canada_C/models/xgb/XGBoost_lr_search_selection_AutoML_1_20230704_151137_select_grid_model_4')
-# deepl4 <- h2o.loadModel('/mnt/DataSpace/Projects/Canada_C/models/deeplearn/DeepLearning_grid_1_AutoML_1_20230704_151137_model_4')
-# rf3 <- h2o.loadModel('/mnt/DataSpace/Projects/Canada_C/models/rf/DRF_1_AutoML_1_20230704_151137')
-#
-# models <- list(stack_m,gbm1,xgb2,rf3, deepl4) #acturalll only should use gbm xgb deep, we here add rf
+h2o.init(nthreads = 12,
+         max_mem_size = '100G',
+         port = port0)
 
 
 #
 #test <- as.h2o(x = ca_base_new[ind, ])
 #modified based on new version, 20230804
-pred_fun0 <- function(model,t_data) {
-  maps0 <- h2o.predict(model,t_data)
-  var_use_df[ind,'pred'] <- as.data.frame(maps0)['predict']
+pred_fun0 <- function(model, t_data) {
+  maps0 <- h2o.predict(model, t_data)
+  var_use_df[ind, 'pred'] <- as.data.frame(maps0)['predict']
   plant_r$pred = var_use_df$pred
   return(plant_r$pred)
 }
 #
-#which is larger than 3, which means larger than 1000
+
 lt1000 <- function(x) {
   x[which(x > 2.7634)] <- 2.7634  # som to soc log10(580) ; 1000/1.724
   return(x)
@@ -175,7 +255,7 @@ lt1000 <- function(x) {
 
 
 ################
-#### 2300 new like access-em2 giss 245 etc.this is just for three model to 2300 
+#### 2300 new like access-em2 giss 245 etc.this is just for three model to 2300
 
 
 # periods0 <- data.frame(a=seq(2021,2300,20),b=seq(2040,2300,20))
@@ -195,7 +275,7 @@ lt1000 <- function(x) {
 #     # xgb2 <- h2o.loadModel('/mnt/DataSpace/Projects/Canada_C/models/xgb/XGBoost_lr_search_selection_AutoML_1_20230704_151137_select_grid_model_4')
 #     # deepl4 <- h2o.loadModel('/mnt/DataSpace/Projects/Canada_C/models/deeplearn/DeepLearning_grid_1_AutoML_1_20230704_151137_model_4')
 #     # rf3 <- h2o.loadModel('/mnt/DataSpace/Projects/Canada_C/models/rf/DRF_1_AutoML_1_20230704_151137')
-#     # models <- list(stack_m,gbm1,xgb2,rf3, deepl4) 
+#     # models <- list(stack_m,gbm1,xgb2,rf3, deepl4)
 #     ca_base_new$Depth = j #8 depth
 #     test <- as.h2o(x = ca_base_new[ind,]) #to h2o frame
 #     #maps <- lapply(models, pred_fun0, t_data = test) #predict
@@ -233,38 +313,51 @@ lt1000 <- function(x) {
 #39724s
 
 
-############# new version for each 
+############# new version for each
 #var_p <- c('NDVI1','EVI2','NPP3','GPP4')
 # var_p <- c('NDVI1','EVI2','NPP3','GPP4','PET5','AI6','Solar26',paste0('BIO',1:19),'smap','SUMAP')
 # var_p <- c('GPP4','PET5','AI6','Solar26',paste0('BIO',1:19),'smap','SUMAP')
-var_p <- c('PET5','AI6','Solar26',paste0('BIO',1:19),'smap','SUMAP')
+var_p <- c('PET5', 'AI6', 'Solar26', paste0('BIO', 1:19), 'smap', 'SUMAP')
 
-# to get gpp np 
+# to get gpp np
 #f1 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/cmip6_complementary/processed_output',full.names = T)
 
-#20240329 changed to 
+#20240329 changed to
 #f1 <- list.files(pattern = 'tif',path = '/mnt/Fastrun/Data_pool/01cmip6_processed_output',full.names = T)
 #f1 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/01cmip6_processed_output_update_npp',full.names = T)
-f1 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/01cmip6_processed_output_EC_GPP',full.names = T)
+f1 <- list.files(pattern = 'tif',
+                 path = '/mnt/DataSpace/Data_pool/01cmip6_processed_output_EC_GPP',
+                 full.names = T)
 
 # to get solar
 #f100 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/cmip6_complementary/processed_output',full.names = T)
 #f100 <- list.files(pattern = 'tif',path = '/mnt/Fastrun/Data_pool/01cmip6_processed_output',full.names = T)
-f100 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/01_rsds_output_10',full.names = T)
+f100 <- list.files(pattern = 'tif',
+                   path = '/mnt/DataSpace/Data_pool/01_rsds_output_10',
+                   full.names = T)
 
 # to get pet
 #f200 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/PET_cmip/processed_pet_each',full.names = T)
 #f200 <- list.files(pattern = 'tif',path = '/mnt/Fastrun/Data_pool/03pet_use_individual',full.names = T)
-f200 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/03pet_use_individual_10',full.names = T)
+f200 <- list.files(pattern = 'tif',
+                   path = '/mnt/DataSpace/Data_pool/03pet_use_individual_10',
+                   full.names = T)
 
-# to get precipitation 
+# to get precipitation
 #f300 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/CMIP6_1km_ca',recursive = TRUE,full.names = TRUE)
 #f300 <- list.files(pattern = 'tif',path = '/mnt/Fastrun/Data_pool/04_bios_variable',recursive = TRUE,full.names = TRUE)
-f300 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/03cmip6_processed_bio19_5min_10',recursive = TRUE,full.names = TRUE)
+f300 <- list.files(
+  pattern = 'tif',
+  path = '/mnt/DataSpace/Data_pool/03cmip6_processed_bio19_5min_10',
+  recursive = TRUE,
+  full.names = TRUE
+)
 
 #f400 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/05_smap')
 #f400 <- list.files(pattern = 'tif',path = '/mnt/Fastrun/Data_pool/05_smap',full.names = T)
-f400 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/05_smap_10',full.names = T)
+f400 <- list.files(pattern = 'tif',
+                   path = '/mnt/DataSpace/Data_pool/05_smap_10',
+                   full.names = T)
 
 #cmip6_ca_raster <- purrr::map(f300,rast)
 #cmip6_df0 <- as.data.frame(as.matrix(cmip6_ca_raster[[i]]))  #40s
@@ -274,31 +367,32 @@ f400 <- list.files(pattern = 'tif',path = '/mnt/DataSpace/Data_pool/05_smap_10',
 
 ####
 
-models <- model_all[begin:end] # for parallel 
+models <- model_all[begin:end] # for parallel
 #models <- 'EC-Earth3-Veg-LR'
 for (i in models) {
-  for(scenario in c('ssp245', 'ssp585')) {
-    f_solar <- grep(paste0('rsds_',i,'_',scenario),f100,value = T)
-    f_pet <- grep(paste0('pet_',i,'_',scenario),f200,value = T)
-    f_map <- grep(paste0(i,'_',scenario),f300,value = T) # we changed names in this folder like 
-    f_plant <- grep(paste0(i,'_',scenario),f1,value = T)
-    f_smap <- grep(paste0(i,'_',scenario),f400,value = T)
+  for (scenario in c('ssp245', 'ssp585')) {
+    f_solar <- grep(paste0('rsds_', i, '_', scenario), f100, value = T)
+    f_pet <- grep(paste0('pet_', i, '_', scenario), f200, value = T)
+    f_map <- grep(paste0(i, '_', scenario), f300, value = T) # we changed names in this folder like
+    f_plant <- grep(paste0(i, '_', scenario), f1, value = T)
+    f_smap <- grep(paste0(i, '_', scenario), f400, value = T)
     
     ##> /mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ , files that with ca_disaggregated put that in the end , for example
     ##> from
     ##> [1] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_disaggregatedwc2.1_30s_bioc_CanESM5_ssp585_2081-2100.tif"
-    ##> [2] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2021-2040.tif"             
-    ##> [3] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2041-2060.tif"             
-    ##> [4] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2061-2080.tif"     
+    ##> [2] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2021-2040.tif"
+    ##> [3] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2041-2060.tif"
+    ##> [4] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2061-2080.tif"
     ##> to
-    ##>  
-    ##> [1] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2021-2040.tif"          
-    ##> [2] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2041-2060.tif"          
-    ##> [3] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2061-2080.tif"          
+    ##>
+    ##> [1] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2021-2040.tif"
+    ##> [2] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2041-2060.tif"
+    ##> [3] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/ca_wc2.1_30s_bioc_CanESM5_ssp585_2061-2080.tif"
     ##> [4] "/mnt/DataSpace/Data_pool/CMIP6_1km_ca/CMIP6_1km_ca_idm/wc2.1_30s_bioc_CanESM5_ssp585_2081-2100disaggregated.tif"
     
     #if(identical(length(f_solar),length(f_pet),length(f_map))) {
-    for (k in 1:length(f_pet)) {  # as pet always 2100
+    for (k in 1:length(f_pet)) {
+      # as pet always 2100
       #    for (k in 1:(length(f3)/3)) {
       
       # gpp <- rast(f_plant[k])/1000
@@ -326,7 +420,7 @@ for (i in models) {
       # evi_multip <- evi1/evi0 #t_evi0
       # ndvi_multip <- clamp(ndvi_multip, upper=10, lower= -10, values=T)
       # evi_multip <- clamp(evi_multip, upper=10, lower= -10, values=T)
-      # # original vndvi 
+      # # original vndvi
       # ndvi00 <- rast('/mnt/Fastrun/Canada_C/rawdata/forfinalmap_1km/NDVI1_ca.tif')
       # evi00 <- rast('/mnt/Fastrun/Canada_C/rawdata/forfinalmap_1km/EVI2_ca.tif')
       # #
@@ -346,21 +440,21 @@ for (i in models) {
       # t10 <- terra::extend(map12,pet5)
       # t20 <- terra::crop(t10,ext(pet5))
       # ai6 <- t20/rast(f_pet[k])
-      ai6 <- map12/rast(f_pet[k])
-      ai60 <- clamp(ai6,upper=7,values=TRUE)
+      ai6 <- map12 / rast(f_pet[k])
+      ai60 <- clamp(ai6, upper = 7, values = TRUE)
       # clim19 <- rast(f_map[clim_ind])
       clim19 <- rast(f_map[k])
-      names(clim19) <- paste0('BIO',1:19)
+      names(clim19) <- paste0('BIO', 1:19)
       # t19 <- terra::extend(clim19,pet5)
       # t270 <- terra::crop(t19,ext(pet5))
       # t270[[c('BIO4','BIO12','BIO18')]] <- round(log10(t270[[c(4,12,18)]]),1)
       # clim19[[c('BIO4','BIO12','BIO18')]] <- round(log10(clim19[[c(4,12,18)]]),1)
       clim19[[12:19]] <- log(clim19[[12:19]]) #note now 12 and 18 == 1 and 7
-      clim19[[4]] <- clim19[[4]] / 100 
+      clim19[[4]] <- clim19[[4]] / 100
       
       #
-      smap <- rast(grep('SMAP',f_smap,value=T)[k])
-      sumap <- rast(grep('SUMAP',f_smap,value=T)[k])
+      smap <- rast(grep('SMAP', f_smap, value = T)[k])
+      sumap <- rast(grep('SUMAP', f_smap, value = T)[k])
       # par(mfrow=c(2,2))
       # plot(map12)
       # plot(rast(f_pet[k]))
@@ -370,7 +464,7 @@ for (i in models) {
       # plant_r <- c(ndvi_new, evi_new, npp, gpp,pet5,ai60,solar26,t270,smap,sumap)
       # plant_r <- c(ndvi_new, evi_new, npp, gpp,pet5,ai60,solar26,clim19,smap,sumap)
       # plant_r <- c(gpp,pet5,ai60,solar26,clim19,smap,sumap)
-      plant_r <- c(pet5,ai60,solar26,clim19,smap,sumap)
+      plant_r <- c(pet5, ai60, solar26, clim19, smap, sumap)
       
       var_use_df <- as.data.frame(as.matrix(plant_r))
       names(var_use_df) <- var_p
@@ -389,8 +483,9 @@ for (i in models) {
       #
       
       #
-      periods0 <- data.frame(a=seq(2001,2300,10),b=seq(2010,2300,10))
-      time00 <- paste0(seq(2001,2291,10),'-',seq(2010,2300,10))
+      periods0 <- data.frame(a = seq(2001, 2300, 10),
+                             b = seq(2010, 2300, 10))
+      time00 <- paste0(seq(2001, 2291, 10), '-', seq(2010, 2300, 10))
       # for (i in bio_fls[begin:end]) {
       #   if (bio %in% c('BIO4', 'BIO12', 'BIO18')) {
       #     bio_raster <- log10(rast(i))
@@ -399,7 +494,7 @@ for (i in models) {
       #     bio_raster <- rast(i)
       #   }
       #   cmip6_df0 <- as.data.frame(as.matrix(bio_raster))
-      #   
+      #
       # dep_df <- data.frame(x1=rep(0,length(which(ind))),#56637000
       #                      x2=rep(5,length(which(ind))),
       #                      x3=rep(15,length(which(ind))),
@@ -412,7 +507,9 @@ for (i in models) {
       # ca_base_new[, bio] <- cmip6_df0[ind, 1]  #note the order
       ca_base_new[, var_p] <- var_use_df[ind, var_p]  #note the order
       
-      h2o.init(nthreads = 12,max_mem_size = '100G', port = port0)
+      h2o.init(nthreads = 12,
+               max_mem_size = '100G',
+               port = port0)
       # dep_hex <- as.h2o(dep_df)
       test <- as.h2o(x = ca_base_new) #to h2o frame
       #gc();gc();gc();gc();
@@ -421,24 +518,37 @@ for (i in models) {
       #stack_m <- h2o.loadModel("/mnt/DataSpace/Projects/Canada_C/models/bestfamiliy_ensemble/StackedEnsemble_BestOfFamily_6_AutoML_1_20231214_210359")
       #finally we select GBM
       #model000 <- grep(pattern = "GBM", x = list.files(path = paste0('/mnt/DataSpace/Projects/Canada_C/turnover_constrain/traind_model/',mk),full.names = T),value=T)
-      #20240329 changed to   
+      #20240329 changed to
       # model000 <- grep(pattern = glob2rx("*GBM*20240329*"), x = list.files(path = paste0('/mnt/DataSpace/Projects/Canada_C/Canada_C_final/traind_model/',mk),full.names = T),value=T) #lu he cardamom 排行第二2 是ensemble 因此就选这个吧
       # model000 <- grep(pattern = glob2rx("*GBM*20240731*"), x = list.files(path = paste0('/mnt/DataSpace/Projects/Canada_C/Canada_C_final/traind_model/',mk),full.names = T),value=T) #lu he cardamom 排行第二2 是ensemble 因此就选这个吧
       model000 <- "/mnt/DataSpace/Projects/Canada_C/Canada_C_final/traind_model/litterinput/GBM_grid_1_AutoML_1_20240824_111040_model_10"
       GBM <- h2o.loadModel(model000)
-      maps <- pred_fun0(model=GBM,t_data=test)
+      maps <- pred_fun0(model = GBM, t_data = test)
       #maps0 <- do.call(c, maps)
       #maps1 <- terra::clamp(maps, upper = 2.7634, values = T)
-      # 20240329 changed to exp( maps ) 
+      # 20240329 changed to exp( maps )
       # maps2 <- round(10000 * exp(maps),4)
-      maps2 <- round(exp(maps),4)
+      maps2 <- round(exp(maps), 4)
       names(maps2) <- 'GBM'
-      terra::writeRaster(maps2,
-                         paste0('/mnt/Fastrun/Canada_C/litter_all_pet_and_Temp_P/','litter_PET_CLIMATE_SM_',i,'_',scenario,'_',time00[k],'.tif'),overwrite = TRUE)
+      terra::writeRaster(
+        maps2,
+        paste0(
+          '/mnt/Fastrun/Canada_C/litter_all_pet_and_Temp_P/',
+          'litter_PET_CLIMATE_SM_',
+          i,
+          '_',
+          scenario,
+          '_',
+          time00[k],
+          '.tif'
+        ),
+        overwrite = TRUE
+      )
       # }
       h2o.shutdown(prompt = FALSE)
     }
-  }}
+  }
+}
 
 #h2o.shutdown(prompt = FALSE)
 #39724s
